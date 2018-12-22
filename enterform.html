@@ -21,11 +21,14 @@
     <div class="container">
       <!--validate in Boostrap use form class="needs-validation"-->
       <!--to create custom validation, use novalidate boolean attribute on form-->
-            <form class="needs-validation">
+            <form class="needs-validation" novalidate>
                     <div class="form-group">
-                      <label for="formGroupExampleInput">Your Name</label>
-                      <input type="text" class="form-control" id="name" placeholder="i.e. Jane Doe">
-                    </div>
+                      <label for="name">Your Name</label>
+                      <input type="text" class="form-control" id="name" placeholder="i.e. Jane Doe" required>
+                      <div class="valid-feedback">
+                          Looks good!
+                        </div> <!--close valid-->
+                    </div> <!--close formgroup -->
                     <br>
                     <h4>Current Location</h4>
                     <div class="form-group">
