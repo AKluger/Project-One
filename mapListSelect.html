@@ -6,32 +6,36 @@
     <title>SAKI Study</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
     <script src="main.js"></script>
 </head>
 <body>
     <div class="container">
     <div class="jumbotron">
         <h1 class="display-4">SAKI Study</h1>
-        <p class="lead">Find a study buddy near you, compare notes, get help, and ace your class.</p>
-        <hr class="my-4">
-        <ul class="list-group">
-            <li class="list-group-item">Are you ready to study?</li>
-            <li class="list-group-item">Enter your information in the form below</li>
-            <li class="list-group-item">SakiStudy will show you a map with people from your class who are ready to study </li>
-            <li class="list-group-item">You'll get back a map with a list of names of fellow study ready to study</li>
-            <li class="list-group-item"> Select someone from the map/list and you'll get a final screen with all the best details of places to meet.</li>
-        </ul>
-        <br>
-          <a class="btn btn-primary btn-lg" href="enterform.html" id="start" role="button">READY TO SAKISTUDY?</a>
-        </p>
+        <p class="lead">Here are your classmates! You can choose them from this map or from the available list below.</p>
       </div>  <!--close jumbotron-->
     </div>  <!--close container-->
 
-      <div class="container">
-          <div id="map"></div>
-          <div id="host"></div>
-      </div>
+   <div class="container">
+        <div class="mapContainer">
+            <img src="philadelphiamap.png" />
+        </div>
+        <br>
+        <h5>Available classmates by name</h5>
+        <form action="">
+                <input type="radio" name="study" value="0"> Suzanne<br>
+                <input type="radio" name="study" value="1"> Ize<br>
+                <input type="radio" name="study" value="2"> Alex<br>
+                <input type="radio" name="study" value="2"> Kevin<br>
+            <br>
+            <br>
+                <a class="btn btn-primary btn-lg" href="finalselect.html" id="finalSelect" role="button">choose your SAKI Study buddy!</a>
+                  </form>
+    </div> <!--close Bootstrap "container" -->   
+
+  
+      </div>    
       <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
