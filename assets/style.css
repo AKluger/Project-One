@@ -1,0 +1,11 @@
+
+/* mapListSelectPage, same css as responsive web deisgn for images */
+.mapContainer{
+    border: 1px solid black;
+}
+.mapContainer img{
+    width: 100%;
+    height: auto;
+    background-image: url('PhiladelphiaMap.png');
+    background-size: cover;
+}
