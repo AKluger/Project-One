@@ -6,6 +6,4 @@
 .mapContainer img{
     width: 100%;
     height: auto;
-    background-image: url('PhiladelphiaMap.png');
-    background-size: cover;
 }
