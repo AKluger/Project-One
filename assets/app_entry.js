@@ -36,6 +36,15 @@ $("#enterform").on("click", function (event) {
   zip = $("#zip_code_address").val().trim();
   hours = $("#hoursAvailable").val().trim();
 
+
+  // Clear local storage and store the address to local storage
+  localStorage.clear();
+  localStorage.setItem("name", name);
+  localStorage.setItem("street", street);
+  localStorage.setItem("city", city);
+  localStorage.setItem("state", state);
+  localStorage.setItem("zip", zip);
+
   // Code for handling the push
   database.ref().push({
     name: name,

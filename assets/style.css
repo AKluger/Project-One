@@ -3,7 +3,7 @@
 .mapContainer{
     border: 1px solid black;
 }
-.mapContainer img{
+#map {
     width: 100%;
-    height: auto;
+    height: 500px;
 }
