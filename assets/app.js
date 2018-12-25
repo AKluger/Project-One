@@ -1,34 +1,40 @@
-// Initialize Firebase
-var config = {
-  apiKey: "AIzaSyD1nyE-SfenxVwBoxuoL92zFCEsZb0GUqo",
-  authDomain: "studybuddy-bc331.firebaseapp.com",
-  databaseURL: "https://studybuddy-bc331.firebaseio.com",
-  projectId: "studybuddy-bc331",
-  storageBucket: "studybuddy-bc331.appspot.com",
-  messagingSenderId: "21013901811"
-};
+$(document).ready(function () {
 
-firebase.initializeApp(config);
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyD1nyE-SfenxVwBoxuoL92zFCEsZb0GUqo",
+    authDomain: "studybuddy-bc331.firebaseapp.com",
+    databaseURL: "https://studybuddy-bc331.firebaseio.com",
+    projectId: "studybuddy-bc331",
+    storageBucket: "studybuddy-bc331.appspot.com",
+    messagingSenderId: "21013901811"
+  };
 
-// Create a variable to reference the database.
-var database = firebase.database();
+  firebase.initializeApp(config);
 
-// Firebase watcher .on
-database.ref().on("value", function (snapshot) {
-  // storing the snapshot.val() in a variable for convenience
-  var sv = snapshot.val();
+  // Create a variable to reference the database.
+  var database = firebase.database();
 
-  // Console.loging the last user's data
-  console.log(sv);
-  console.log(sv.street);
-  console.log(sv.city);
-  console.log(sv.state);
-  console.log(sv.zip);
-  console.log(sv.hours);
+  // // Firebase watcher .on
+  // database.ref().on("value", function (snapshot) {
+  //   // storing the snapshot.val() in a variable for convenience
+  //   var sv = snapshot.val();
 
+  // Console.logging addresses in firebase 
+  // console.log(sv);
+  // console.log(sv.street);
+  // console.log(sv.city);
+  // console.log(sv.state);
+  // console.log(sv.zip);
+  // console.log(sv.hours);
+
+  // Get the user location from the local storage
+  var street = localStorage.getItem("street");
+  var city = localStorage.getItem("city");
+  var state = localStorage.getItem("state");
 
   // Ajax code to geocod.io to convert text address to latitude and longitude
-  var queryURL = "https://api.geocod.io/v1.3/geocode?street=" + sv.street + "&city=" + sv.city + "&state=" + sv.state + "&api_key=6446f59bc5ec449c45ce44c9c4466c5f61816e1"
+  var queryURL = "https://api.geocod.io/v1.3/geocode?street=" + street + "&city=" + city + "&state=" + state + "&api_key=6446f59bc5ec449c45ce44c9c4466c5f61816e1"
 
   var userCoordinates = [];
 
@@ -42,6 +48,7 @@ database.ref().on("value", function (snapshot) {
     var lat = response.results[0].location.lat; // stores latitude
     var lng = response.results[0].location.lng; // stores longitude
     userCoordinates = [lat, lng];
+    console.log(userCoordinates);
 
     // Default locations
     var phillyCoordinates = [39.9526, -75.1652];
@@ -62,7 +69,7 @@ database.ref().on("value", function (snapshot) {
 
     // Dialog boxes visible by clicking on icon
     userMarker.bindPopup('This is your current location').openPopup();
-    marker.bindPopup('This is your home');
+    marker.bindPopup('This is city hall');
     marker2.bindPopup('This is your class');
     // marker2.bindPopup('This is your class').openPopup(); //if you want the popup to show already without clicking
 
@@ -73,14 +80,14 @@ database.ref().on("value", function (snapshot) {
   // $("#age-display").text(sv.age);
   // $("#comment-display").text(sv.comment);
 
-  // Handle the errors
-}, function (errorObject) {
-  console.log("Errors handled: " + errorObject.code);
+  //   // Handle the errors
+  // }, function (errorObject) {
+  //   console.log("Errors handled: " + errorObject.code);
+  // });
+
+
+
 });
-
-
-
-
 
 
 

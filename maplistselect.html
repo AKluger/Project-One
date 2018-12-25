@@ -11,9 +11,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
 
-    <!-- Our CSS file-->
-    <link rel="stylesheet" type="text/css" media="screen" href="assets/style.css" />
-
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -21,12 +18,15 @@
     <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
 
     <!-- For TomTom maps -->
-    <link rel='stylesheet' type='text/css' href='sdk/map.css' />
+    <link rel='stylesheet' type='text/css' href='sdk/map.css'>
     <script src='sdk/tomtom.min.js'></script>
+
+     <!-- Our CSS file -->
+     <link rel="stylesheet" type="text/css" media="screen" href="assets/style.css" />
+
 </head>
 
 <body>
-    <div id='map'></div>
 
     <div class="container">
         <div class="jumbotron">
@@ -38,11 +38,9 @@
     </div>
     <!--close container-->
 
-
-
     <div class="container">
         <div class="mapContainer">
-
+            <div id='map'></div>
         </div>
         <br>
         <h5>Available classmates by name</h5>
@@ -50,7 +48,7 @@
             <input type="radio" name="study" value="0"> Suzanne<br>
             <input type="radio" name="study" value="1"> Ize<br>
             <input type="radio" name="study" value="2"> Alex<br>
-            <input type="radio" name="study" value="2"> Kevin<br>
+            <input type="radio" name="study" value="3"> Kevin<br>
             <br>
             <br>
             <a class="btn btn-primary btn-lg" href="finalselect.html" id="finalSelect" role="button">choose your SAKI
