@@ -45,16 +45,40 @@ $("#enterform").on("click", function (event) {
   localStorage.setItem("state", state);
   localStorage.setItem("zip", zip);
 
-  // Code for handling the push
-  database.ref("users").push({
-    name: name,
-    street: street,
-    city: city,
-    state: state,
-    zip: zip,
-    hours: hours,
-    infoAdded: firebase.database.ServerValue.TIMESTAMP
+  // Ajax code to geocod.io to convert text address to latitude and longitude
+  var queryURL2 = "https://api.geocod.io/v1.3/geocode?street=" + street + "&city=" + city + "&state=" + state + "&api_key=6446f59bc5ec449c45ce44c9c4466c5f61816e1";
+
+  console.log(queryURL2);
+
+  var tempCoordinates = [];
+
+  $.ajax({
+    url: queryURL2,
+    method: "GET"
+  }).then(function (response) {
+    console.log(response);
+    //Storing latitude and longitude
+    var lat = response.results[0].location.lat; // stores latitude
+    var lng = response.results[0].location.lng; // stores longitude
+    tempCoordinates = [lat, lng];
+    
+    console.log(tempCoordinates);
+
+    // Code for handling the push
+    database.ref("users").push({
+      name: name,
+      street: street,
+      city: city,
+      state: state,
+      zip: zip,
+      coordinates: tempCoordinates,
+      hours: hours,
+      infoAdded: firebase.database.ServerValue.TIMESTAMP
+    });
+
   });
+
+
 });
 
 // Firebase watcher .on("child_added"
