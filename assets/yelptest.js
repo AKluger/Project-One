@@ -14,7 +14,7 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 
-$("#searchButton").on("click", function (event) {
+$("#enterform").on("click", function (event) {
 
     event.preventDefault();
 
@@ -34,29 +34,30 @@ $("#searchButton").on("click", function (event) {
         method: "GET"
     }).then(function (response) {
         // console.log(response)
+
         for (var i = 0; i < response.businesses.length; i++) {
             var results = response.businesses[i].coordinates;
             var lat = results.latitude;
             var lng = results.longitude;
             var coordinates = [lat, lng];
             var name = response.businesses[i].name;
+            var isClosed = response.businesses[i].is_closed;
 
-            // console.log(results)
-            // console.log( lat + " " + lng + " " + name)
-            database.ref().push({
+            database.ref("places").push({
                 placeName: name,
                 placeCoordinates: coordinates,
+                closedStatus: isClosed
             });
-            // console.log(database.ref().child("places"))
         }
 
 
-        database.ref().on("child_added", function (snapshot) {
-            // storing the snapshot.val() in a variable for convenience
+        database.ref("places").on("child_added", function (snapshot) {
+         
             var sv = snapshot.val();
-            // Console.logging the last user's data
+          
             console.log(sv.placeName);
             console.log(sv.placeCoordinates);
+            console.log(sv.isClosed);
 
         })
 
