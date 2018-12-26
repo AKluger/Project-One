@@ -42,13 +42,11 @@ $(document).ready(function () {
     url: queryURL,
     method: "GET"
   }).then(function (response) {
-    console.log(response);
-
     //Storing latitude and longitude
     var lat = response.results[0].location.lat; // stores latitude
     var lng = response.results[0].location.lng; // stores longitude
     userCoordinates = [lat, lng];
-    console.log(userCoordinates);
+    localStorage.setItem("userCoordinates", userCoordinates); // adds userCoordinates to localStorage
 
     // Default locations
     var phillyCoordinates = [39.9526, -75.1652];
@@ -60,7 +58,7 @@ $(document).ready(function () {
       basePath: '/sdk',
       center: userCoordinates,
       zoom: 14
-    });
+    }); // close ajax
 
     // Icons on the map
     var userMarker = tomtom.L.marker(userCoordinates).addTo(map);
@@ -69,11 +67,33 @@ $(document).ready(function () {
 
     // Dialog boxes visible by clicking on icon
     userMarker.bindPopup('This is your current location').openPopup();
-    marker.bindPopup('This is city hall');
-    marker2.bindPopup('This is your class');
+    marker.bindPopup('City hall');
+    marker2.bindPopup('Pennovation center');
     // marker2.bindPopup('This is your class').openPopup(); //if you want the popup to show already without clicking
 
-  }); // close ajax  
+    // // Adding other student locations from firebase
+    var ref = database.ref('users').on("child_added", function (snapshot) {
+      var snap = snapshot.val(); // store values
+      
+        console.log(snap);
+        console.log(snap.coordinates);
+      
+      var marker = tomtom.L.marker(tempCoordinates, {
+        icon: tomtom.L.icon({
+          iconUrl: 'sdk/images/ic_map_poi_027-black.png',
+          iconSize: [30, 30]
+        })
+      }).addTo(map).bindPopup(snap.name);
+
+    }); // close firebase
+
+
+
+  }); // close ajax
+
+}); // close document ready
+
+
   // Change the HTML to reflect
   // $("#name-display").text(sv.name);
   // $("#email-display").text(sv.email);
@@ -84,12 +104,6 @@ $(document).ready(function () {
   // }, function (errorObject) {
   //   console.log("Errors handled: " + errorObject.code);
   // });
-
-
-
-});
-
-
 
 
 // $(document).ready(function() {
