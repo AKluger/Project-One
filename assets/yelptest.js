@@ -14,7 +14,7 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 
-$("#searchButton").on("click", function (event) {
+$("#enterform").on("click", function (event) {
 
     event.preventDefault();
 
