@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SAKI Study</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+
+    <!-- For TomTom maps -->
+    <link rel='stylesheet' type='text/css' href='sdk/map.css'>
+    <script src='sdk/tomtom.min.js'></script>
+
+     <!-- Our CSS file -->
+     <link rel="stylesheet" type="text/css" media="screen" href="assets/style.css" />
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-4">SAKI Study</h1>
+            <p class="lead">Here are your classmates! You can choose them from this map or from the available list
+                below.</p>
+        </div>
+        <!--close jumbotron-->
+    </div>
+    <!--close container-->
+
+    <div class="container">
+        <div class="mapContainer">
+            <div id='map'></div>
+        </div>
+        <br>
+        <h5>Available classmates by name</h5>
+        <form action="">
+            <input type="radio" name="study" value="0"> Suzanne<br>
+            <input type="radio" name="study" value="1"> Ize<br>
+            <input type="radio" name="study" value="2"> Alex<br>
+            <input type="radio" name="study" value="3"> Kevin<br>
+            <br>
+            <br>
+            <a class="btn btn-primary btn-lg" href="finalselect.html" id="finalSelect" role="button">choose your SAKI
+                Study buddy!</a>
+        </form>
+    </div>
+    <!--close Bootstrap "container" -->
+    <!-- dleetge -->
+    </div>
+
+    <script src="assets/app.js"></script>
+ 
+</body>
+
+</html>
