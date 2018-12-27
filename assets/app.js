@@ -60,23 +60,15 @@ $(document).ready(function () {
       zoom: 14
     }); // close ajax
 
-    // Icons on the map
+    // Icon for the user location with the dialog box already open
     var userMarker = tomtom.L.marker(userCoordinates).addTo(map);
-    // var marker = tomtom.L.marker(phillyCoordinates).addTo(map);
-    // var marker2 = tomtom.L.marker(pennovationCoordinates).addTo(map);
 
-    // Dialog boxes visible by clicking on icon
     userMarker.bindPopup('This is your current location').openPopup();
-    // marker.bindPopup('City hall');
-    // marker2.bindPopup('Pennovation center');
-    // marker2.bindPopup('This is your class').openPopup(); //if you want the popup to show already without clicking
 
     // // Adding other student locations from firebase
     var ref = database.ref('users').on("child_added", function (snapshot) {
       var snap = snapshot.val(); // store values
 
-      console.log(snap);
-      console.log(snap.coordinates);
       if (snap.name !== localStorage.getItem("name")) {
         var marker = tomtom.L.marker(snap.coordinates, {
           icon: tomtom.L.icon({
@@ -84,7 +76,18 @@ $(document).ready(function () {
             iconSize: [40, 40]
           })
         }).addTo(map).bindPopup(snap.name);
-      } // close if statement to avoid duplicating icons 
+
+        // Adding the other student information to a chart
+        var newRow = $("<tr>").append(
+          $("<td>").text(snap.name),
+          $("<td>").text(snap.street),
+          $("<td>").text(snap.hours)
+        );
+
+        // Append the new row to the html
+        $("tbody").append(newRow);
+
+      }; // close if statement to avoid duplicating icons 
     }); // close firebase
 
   }); // close ajax
