@@ -74,17 +74,17 @@ $(document).ready(function () {
     // // Adding other student locations from firebase
     var ref = database.ref('users').on("child_added", function (snapshot) {
       var snap = snapshot.val(); // store values
-      
-        console.log(snap);
-        console.log(snap.coordinates);
-      
-      var marker = tomtom.L.marker(snap.coordinates, {
-        icon: tomtom.L.icon({
-          iconUrl: 'sdk/images/ic_map_poi_027-black.png',
-          iconSize: [40, 40]
-        })
-      }).addTo(map).bindPopup(snap.name);
 
+      console.log(snap);
+      console.log(snap.coordinates);
+      if (snap.name !== localStorage.getItem("name")) {
+        var marker = tomtom.L.marker(snap.coordinates, {
+          icon: tomtom.L.icon({
+            iconUrl: 'sdk/images/ic_map_poi_027-black.png',
+            iconSize: [40, 40]
+          })
+        }).addTo(map).bindPopup(snap.name);
+      } // close if statement to avoid duplicating icons 
     }); // close firebase
 
   }); // close ajax
