@@ -42,17 +42,15 @@ $(document).ready(function () {
     url: queryURL,
     method: "GET"
   }).then(function (response) {
-    console.log(response);
-
     //Storing latitude and longitude
     var lat = response.results[0].location.lat; // stores latitude
     var lng = response.results[0].location.lng; // stores longitude
     userCoordinates = [lat, lng];
-    console.log(userCoordinates);
+    localStorage.setItem("userCoordinates", userCoordinates); // adds userCoordinates to localStorage
 
     // Default locations
-    var phillyCoordinates = [39.9526, -75.1652];
-    var pennovationCoordinates = [39.941252, -75.199540]
+    //var phillyCoordinates = [39.9526, -75.1652];
+    //var pennovationCoordinates = [39.941252, -75.199540]
 
     // Map itself uses the TomTom SDK (hence the massive /sdk directory)
     var map = tomtom.L.map('map', {
@@ -60,20 +58,43 @@ $(document).ready(function () {
       basePath: '/sdk',
       center: userCoordinates,
       zoom: 14
-    });
+    }); // close ajax
 
-    // Icons on the map
+    // Icon for the user location with the dialog box already open
     var userMarker = tomtom.L.marker(userCoordinates).addTo(map);
-    var marker = tomtom.L.marker(phillyCoordinates).addTo(map);
-    var marker2 = tomtom.L.marker(pennovationCoordinates).addTo(map);
 
-    // Dialog boxes visible by clicking on icon
     userMarker.bindPopup('This is your current location').openPopup();
-    marker.bindPopup('This is city hall');
-    marker2.bindPopup('This is your class');
-    // marker2.bindPopup('This is your class').openPopup(); //if you want the popup to show already without clicking
 
-  }); // close ajax  
+    // // Adding other student locations from firebase
+    var ref = database.ref('users').on("child_added", function (snapshot) {
+      var snap = snapshot.val(); // store values
+
+      if (snap.name !== localStorage.getItem("name")) {
+        var marker = tomtom.L.marker(snap.coordinates, {
+          icon: tomtom.L.icon({
+            iconUrl: 'sdk/images/ic_map_poi_027-black.png',
+            iconSize: [40, 40]
+          })
+        }).addTo(map).bindPopup(snap.name);
+
+        // Adding the other student information to a chart
+        var newRow = $("<tr>").append(
+          $("<td>").text(snap.name),
+          $("<td>").text(snap.street),
+          $("<td>").text(snap.hours)
+        );
+
+        // Append the new row to the html
+        $("tbody").append(newRow);
+
+      }; // close if statement to avoid duplicating icons 
+    }); // close firebase
+
+  }); // close ajax
+
+}); // close document ready
+
+
   // Change the HTML to reflect
   // $("#name-display").text(sv.name);
   // $("#email-display").text(sv.email);
@@ -84,12 +105,6 @@ $(document).ready(function () {
   // }, function (errorObject) {
   //   console.log("Errors handled: " + errorObject.code);
   // });
-
-
-
-});
-
-
 
 
 // $(document).ready(function() {

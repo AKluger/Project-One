@@ -21,8 +21,8 @@
     <link rel='stylesheet' type='text/css' href='sdk/map.css'>
     <script src='sdk/tomtom.min.js'></script>
 
-     <!-- Our CSS file -->
-     <link rel="stylesheet" type="text/css" media="screen" href="assets/style.css" />
+    <!-- Our CSS file -->
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/style.css" />
 
 </head>
 
@@ -43,13 +43,26 @@
             <div id='map'></div>
         </div>
         <br>
-        <h5>Available classmates by name</h5>
         <form action="">
             <input type="radio" name="study" value="0"> Suzanne<br>
             <input type="radio" name="study" value="1"> Ize<br>
             <input type="radio" name="study" value="2"> Alex<br>
             <input type="radio" name="study" value="3"> Kevin<br>
             <br>
+
+            <!-- Displays students -->
+            <table class="table table-hover">
+                <h5>Available classmates by name</h5>
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Hours</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+
             <br>
             <a class="btn btn-primary btn-lg" href="finalselect.html" id="finalSelect" role="button">choose your SAKI
                 Study buddy!</a>
@@ -60,7 +73,7 @@
     </div>
 
     <script src="assets/app.js"></script>
- 
+
 </body>
 
 </html>
