@@ -48,7 +48,7 @@ $(document).ready(function () {
             database.ref("places").push({
                 placeName: name,
                 placeCoordinates: coordinates,
-                placeUrl = webUrl
+                placeUrl : webUrl
             });
 
             //create the map
@@ -72,7 +72,7 @@ $(document).ready(function () {
                         iconUrl: 'assets/coffee.png',
                         iconSize: [30, 30]
                     })
-                }).addTo(map).bindPopup(sv.placeName).setcontent(<a href="sv.placeUrl">sv.placeName</a>);
+                }).addTo(map).bindPopup(sv.placeName);
                 //add coffeeshop icon with name to map
             }); // close snapshot
         }
