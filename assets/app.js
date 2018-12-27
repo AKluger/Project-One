@@ -49,8 +49,8 @@ $(document).ready(function () {
     localStorage.setItem("userCoordinates", userCoordinates); // adds userCoordinates to localStorage
 
     // Default locations
-    var phillyCoordinates = [39.9526, -75.1652];
-    var pennovationCoordinates = [39.941252, -75.199540]
+    //var phillyCoordinates = [39.9526, -75.1652];
+    //var pennovationCoordinates = [39.941252, -75.199540]
 
     // Map itself uses the TomTom SDK (hence the massive /sdk directory)
     var map = tomtom.L.map('map', {
@@ -62,13 +62,13 @@ $(document).ready(function () {
 
     // Icons on the map
     var userMarker = tomtom.L.marker(userCoordinates).addTo(map);
-    var marker = tomtom.L.marker(phillyCoordinates).addTo(map);
-    var marker2 = tomtom.L.marker(pennovationCoordinates).addTo(map);
+    // var marker = tomtom.L.marker(phillyCoordinates).addTo(map);
+    // var marker2 = tomtom.L.marker(pennovationCoordinates).addTo(map);
 
     // Dialog boxes visible by clicking on icon
     userMarker.bindPopup('This is your current location').openPopup();
-    marker.bindPopup('City hall');
-    marker2.bindPopup('Pennovation center');
+    // marker.bindPopup('City hall');
+    // marker2.bindPopup('Pennovation center');
     // marker2.bindPopup('This is your class').openPopup(); //if you want the popup to show already without clicking
 
     // // Adding other student locations from firebase
@@ -78,16 +78,14 @@ $(document).ready(function () {
         console.log(snap);
         console.log(snap.coordinates);
       
-      var marker = tomtom.L.marker(tempCoordinates, {
+      var marker = tomtom.L.marker(snap.coordinates, {
         icon: tomtom.L.icon({
           iconUrl: 'sdk/images/ic_map_poi_027-black.png',
-          iconSize: [30, 30]
+          iconSize: [40, 40]
         })
       }).addTo(map).bindPopup(snap.name);
 
     }); // close firebase
-
-
 
   }); // close ajax
 
