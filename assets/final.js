@@ -21,14 +21,22 @@ $(document).ready(function () {
     var street = localStorage.getItem("street");
     var city = localStorage.getItem("city");
     var state = localStorage.getItem("state");
-
     var location = street + city + state;
     // user city and state from form here
+
+    // Retrieve user and chosen study buddy locations from local storage
+    var userCoordinates = localStorage.getItem("userCoordinates");
+    var userName = localStorage.getItem("name");
+    var chosenCoordinates = localStorage.getItem("chosenCoordinates");
+    var chosenName = localStorage.getItem("chosenName");
+
 
 
 
     var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=cafe&location=" + location + "&radius=11265";
     //api call to Yelp for cafe names and coordinates 
+
+    console.log(queryURL);
     $.ajax({
         url: queryURL,
         headers: {
@@ -36,7 +44,7 @@ $(document).ready(function () {
         },
         method: "GET"
     }).then(function (response) {
-  
+
         for (var i = 0; i < response.businesses.length; i++) {
             var results = response.businesses[i].coordinates;
             var lat = results.latitude;
@@ -48,16 +56,30 @@ $(document).ready(function () {
             database.ref("places").push({
                 placeName: name,
                 placeCoordinates: coordinates,
-                placeUrl : webUrl
+                placeUrl: webUrl
             });
+
+            console.log(coordinates);
+
 
             //create the map
             var map = tomtom.L.map('map', {
                 key: 'sYDNGj8wET1YxX9MvoISZSyPtefiwHDM',
                 basePath: '/sdk',
-                center: coordinates,
+                center: userCoordinates,
                 zoom: 14
             });
+
+            // Adding user flag icon
+            var userMarker = tomtom.L.marker(userCoordinates).addTo(map).bindPopup(userName);
+
+            // Adding chosen study buddy icon
+            var chosenMarker = tomtom.L.marker(chosenCoordinates, {
+                icon: tomtom.L.icon({
+                    iconUrl: 'sdk/images/ic_map_poi_027-black.png',
+                    iconSize: [40, 40]
+                })
+            }).addTo(map).bindPopup(chosenName);
 
             database.ref("places").on("child_added", function (snapshot) {
 
@@ -75,7 +97,8 @@ $(document).ready(function () {
                 }).addTo(map).bindPopup(sv.placeName);
                 //add coffeeshop icon with name to map
             }); // close snapshot
-        }
-    })
 
-})
+        };
+    });
+
+});

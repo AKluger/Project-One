@@ -77,18 +77,46 @@ $(document).ready(function () {
           })
         }).addTo(map).bindPopup(snap.name);
 
+        // Generate a button to select
+        var selectBtn = $("<a>");
+        selectBtn.attr("class", "btn btn-secondary chosen");
+        selectBtn.attr("href", "finalselect.html");
+        selectBtn.attr("id", snap.name);
+        selectBtn.attr("lat", snap.coordinates[0]);
+        selectBtn.attr("lng", snap.coordinates[1]);
+        selectBtn.attr("role", "button");
+        selectBtn.text("Choose " + snap.name + " as your Study Buddy");
+
         // Adding the other student information to a chart
         var newRow = $("<tr>").append(
           $("<td>").text(snap.name),
           $("<td>").text(snap.street),
-          $("<td>").text(snap.hours)
+          $("<td>").text(snap.hours),
+          $("<td>").text("Kevin: need the calculated end time here"),
+          $("<td>").append(selectBtn)
         );
 
         // Append the new row to the html
         $("tbody").append(newRow);
-
       }; // close if statement to avoid duplicating icons 
+
+      $(".chosen").on("click", function (event) {
+        event.preventDefault();
+
+        // Retrieve latitude and longitude attributes in the clicked button and store as array
+        var chosenCoordinates = [this.getAttribute("lat"), this.getAttribute("lng")];
+
+        // Store the chosen study buddy name and location to local storage
+        localStorage.setItem("chosenName", this.id);
+        localStorage.setItem("chosenCoordinates", chosenCoordinates);
+
+        //this.css({"color": "blue"});
+ 
+      }); // close onclick button
+
     }); // close firebase
+
+
 
   }); // close ajax
 
