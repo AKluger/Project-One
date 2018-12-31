@@ -18,14 +18,53 @@ $(document).ready(function () {
 
     // event.preventDefault();
 
+    // Retrieve user and chosen study buddy locations from local storage
+    var userCoordinates = localStorage.getItem("userCoordinates");
+    userCoordinates = userCoordinates.split(',');
+    var userName = localStorage.getItem("name");
+    var chosenCoordinates = localStorage.getItem("chosenCoordinates");
+    chosenCoordinates = chosenCoordinates.split(',');
+    var chosenName = localStorage.getItem("chosenName");
+
+    // Calculating the midpoint between user and selected student
+    var midpointCoordinates = [];
+    var midpointLat;
+    var midpointLong;
+
+
+    // Determining latitude
+    if (userCoordinates[0] > chosenCoordinates[0]) {
+        midpointLat = parseFloat(chosenCoordinates[0]) + Math.abs((parseFloat(userCoordinates[0]) - parseFloat(chosenCoordinates[0])) / 2);
+    } else if (userCoordinates[0] < chosenCoordinates[0]) {
+        midpointLat = parseFloat(chosenCoordinates[0]) - Math.abs((parseFloat(userCoordinates[0]) - parseFloat(chosenCoordinates[0])) / 2);
+    } else if (userCoordinates[0] === chosenCoordinates[0]) {
+        midpointLat = userCoordinates[0];
+    }
+
+    console.log(parseFloat(userCoordinates[1]));
+    console.log(parseFloat(chosenCoordinates[1]));
+
+    // Determining longitude (this is a little trickier because longitude is a negative number, hence the parseFloats)
+    if (parseFloat(userCoordinates[1]) > parseFloat(chosenCoordinates[1])) {
+        midpointLong = parseFloat(userCoordinates[1]) - Math.abs((parseFloat(userCoordinates[1]) - parseFloat(chosenCoordinates[1])) / 2);
+    } else if (parseFloat(userCoordinates[1]) < parseFloat(chosenCoordinates[1])) {
+        midpointLong = parseFloat(chosenCoordinates[1]) - Math.abs((parseFloat(chosenCoordinates[1]) - parseFloat(userCoordinates[1])) / 2);
+    } else if (userCoordinates[1] === chosenCoordinates[1]) {
+        midpointLong = userCoordinates[1];
+    }
+
+    midpointCoordinates = [midpointLat, midpointLong];
+    console.log("midpoint coordinates: " + midpointCoordinates);
+
+
+
+
+
     var street = localStorage.getItem("street");
     var city = localStorage.getItem("city");
     var state = localStorage.getItem("state");
-
     var location = street + city + state;
     // user city and state from form here
-
-
 
     var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=cafe&location=" + location + "&radius=11265";
     //api call to Yelp for cafe names and coordinates 
@@ -36,7 +75,7 @@ $(document).ready(function () {
         },
         method: "GET"
     }).then(function (response) {
-  
+
         for (var i = 0; i < response.businesses.length; i++) {
             var results = response.businesses[i].coordinates;
             var lat = results.latitude;
@@ -48,14 +87,14 @@ $(document).ready(function () {
             database.ref("places").push({
                 placeName: name,
                 placeCoordinates: coordinates,
-                placeUrl : webUrl
+                placeUrl: webUrl
             });
 
             //create the map
             var map = tomtom.L.map('map', {
                 key: 'sYDNGj8wET1YxX9MvoISZSyPtefiwHDM',
                 basePath: '/sdk',
-                center: coordinates,
+                center: midpointCoordinates,
                 zoom: 14
             });
 
@@ -75,6 +114,20 @@ $(document).ready(function () {
                 }).addTo(map).bindPopup(sv.placeName);
                 //add coffeeshop icon with name to map
             }); // close snapshot
+
+            //Adding user flag icon
+            var userMarker = tomtom.L.marker(userCoordinates).addTo(map).bindPopup("Your are here");
+
+            //Adding chosen study buddy icon
+            var chosenMarker = tomtom.L.marker(chosenCoordinates, {
+                icon: tomtom.L.icon({
+                    iconUrl: 'sdk/images/ic_map_poi_027-black.png',
+                    iconSize: [40, 40]
+                })
+            }).addTo(map).bindPopup(chosenName);
+
+            // Adding midpoint as a marker(to check if the calculations are correct)
+            var midpointMarker = tomtom.L.marker(midpointCoordinates).addTo(map).bindPopup('Midpoint (delete this popup once you know it works)');
         }
     })
 
