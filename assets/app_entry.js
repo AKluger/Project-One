@@ -76,6 +76,7 @@ $("#enterform").on("click", function (event) {
       infoAdded: firebase.database.ServerValue.TIMESTAMP
     });
 
+    window.location.href = "maplistselect.html";
   });
 
 
