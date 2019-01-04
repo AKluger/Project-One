@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>SAKI Study</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+
+  <!-- Our CSS file-->
+  <link rel="stylesheet" type="text/css" media="screen" href="assets/style.css" />
+
+  <!-- jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+
+  <!-- For TomTom maps -->
+  <link rel='stylesheet' type='text/css' href='sdk/map.css' />
+  <script src='sdk/tomtom.min.js'></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="jumbotron">
+      <h1 class="display-4">SAKI Study</h1>
+      <p class="lead">Enter your info to see your classmates</p>
+      <p class="lead">Your entry info will be cleared from this app when your available time is over. </p>
+    </div>
+    <!--close jumbotron-->
+  </div>
+  <!--close container-->
+
+  <div class="container">
+    <form>
+      <div class="form-group">
+        <label for="formGroupExampleInput">Your Name</label>
+        <input type="text" class="form-control" id="name" placeholder="i.e. Jane Doe">
+      </div>
+      <br>
+      <h4>Current Location</h4>
+      <div class="form-group">
+        <label for="formGroupExampleInput2">Street Address</label>
+        <input type="text" class="form-control" id="street_address" placeholder="1234 Any Street">
+      </div>
+
+      <div class="form-group">
+        <label for="formGroupExampleInput2">City</label>
+        <input type="text" class="form-control" id="city_address" placeholder="i.e. Philadelphia">
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlSelect1">State</label>
+        <select class="form-control" id="state_address">
+          <option>(PA) Pennsylvania</option>
+          <option>(NJ) New Jersey</option>
+          <option>(DE) Deleware</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="formGroupExampleInput2">Zip Code</label>
+        <input type="text" class="form-control" id="zip_code_address" placeholder="Zip Code">
+      </div>
+      <br>
+      <h4>How much time do you have available to study today?</h4>
+      <div class="form-group">
+        <label for="exampleFormControlSelect1">Approximate Number of Hours (Your entry info will be cleared from this
+          app when your available time is over.)</label>
+        <select class="form-control" id="hoursAvailable">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+        </select>
+      </div>
+
+      <a class="btn btn-primary btn-lg" href="maplistselect.html" id="enterform" role="button">SUBMIT LOCATION AND TIME</a>
+
+    </form>
+  </div>
+  <!--close Bootstrap "container" -->
+
+  </div>
+  <script src="assets/app_entry.js"></script>
+</body>
+
+</html>
