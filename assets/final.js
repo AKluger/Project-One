@@ -66,7 +66,7 @@ $(document).ready(function () {
     var location = street + city + state;
     // user city and state from form here
 
-    var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=cafe&latitude=" + midpointLat + "&longitude=" + midpointLong + "&radius=11265";
+    var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=cafe&latitude=" + midpointLat + "&longitude=" + midpointLong;
     //api call to Yelp for cafe names and coordinates 
     $.ajax({
         url: queryURL,
@@ -75,7 +75,7 @@ $(document).ready(function () {
         },
         method: "GET"
     }).then(function (response) {
-
+console.log(response)
         for (var i = 0; i < response.businesses.length; i++) {
             var results = response.businesses[i].coordinates;
             var lat = results.latitude;
@@ -87,7 +87,7 @@ $(document).ready(function () {
             database.ref("places").push({
                 placeName: name,
                 placeCoordinates: coordinates,
-                placeUrl: webUrl
+                // placeUrl: webUrl
             });
 
             //create the map
