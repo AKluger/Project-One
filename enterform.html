@@ -1,90 +1,124 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>SAKI Study</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-    crossorigin="anonymous">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SAKI Study</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+crossorigin="anonymous">
 
-  <!-- Our CSS file-->
-  <link rel="stylesheet" type="text/css" media="screen" href="assets/style.css" />
+<!-- Our CSS file-->
+<link rel="stylesheet" type="text/css" media="screen" href="assets/style.css" />
 
-  <!-- jQuery -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- jQuery -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
 
-  <!-- For TomTom maps -->
-  <link rel='stylesheet' type='text/css' href='sdk/map.css' />
-  <script src='sdk/tomtom.min.js'></script>
+<!-- For TomTom maps -->
+<link rel='stylesheet' type='text/css' href='sdk/map.css' />
+<script src='sdk/tomtom.min.js'></script>
 </head>
 
+    
+</head>
 <body>
-  <div class="container">
+    <div class="container">
     <div class="jumbotron">
-      <h1 class="display-4">SAKI Study</h1>
-      <p class="lead">Enter your info to see your classmates</p>
-      <p class="lead">Your entry info will be cleared from this app when your available time is over. </p>
-    </div>
-    <!--close jumbotron-->
-  </div>
-  <!--close container-->
+        <h1 class="display-4">SAKI Study</h1>
+        <p class="lead">Enter your info to see your classmates</p>
+        <p class="lead">Your entry info will be cleared from this app when your available time is over. </p>
+      </div>  <!--close jumbotron-->
+    </div>  <!--close container-->
 
-  <div class="container">
-    <form>
-      <div class="form-group">
-        <label for="formGroupExampleInput">Your Name</label>
-        <input type="text" class="form-control" id="name" placeholder="i.e. Jane Doe">
-      </div>
-      <br>
-      <h4>Current Location</h4>
-      <div class="form-group">
-        <label for="formGroupExampleInput2">Street Address</label>
-        <input type="text" class="form-control" id="street_address" placeholder="1234 Any Street">
-      </div>
+    <div class="container">
+      <!--validate in Boostrap use form class="needs-validation"-->
+      <!--to create custom validation, use novalidate boolean attribute on form-->
+            <form class="needs-validation" novalidate>
+                    <div class="form-group">
+                      <label for="name">Your Name</label>
+                      <input type="text" class="form-control" id="name" placeholder="i.e. Jane Doe" value="Mark" required>
+                        <div class="invalid-feedback">
+                            Enter your name
+                          </div>
+                    </div>
+                    <br>
+                    <h4>Your Home or Ideal Location to Meet</h4>
+                    <div class="form-group">
+                        <label for="street_address">Street Address</label>
+                        <input type="text" class="form-control" id="street_address" placeholder="1234 Any Street" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid street address
+                          </div>
+                    </div>
 
-      <div class="form-group">
-        <label for="formGroupExampleInput2">City</label>
-        <input type="text" class="form-control" id="city_address" placeholder="i.e. Philadelphia">
-      </div>
-      <div class="form-group">
-        <label for="exampleFormControlSelect1">State</label>
-        <select class="form-control" id="state_address">
-          <option>(PA) Pennsylvania</option>
-          <option>(NJ) New Jersey</option>
-          <option>(DE) Deleware</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="formGroupExampleInput2">Zip Code</label>
-        <input type="text" class="form-control" id="zip_code_address" placeholder="Zip Code">
-      </div>
-      <br>
-      <h4>How much time do you have available to study today?</h4>
-      <div class="form-group">
-        <label for="exampleFormControlSelect1">Approximate Number of Hours (Your entry info will be cleared from this
-          app when your available time is over.)</label>
-        <select class="form-control" id="hoursAvailable">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-        </select>
-      </div>
+                    <div class="form-group">
+                        <label for="city_address">City</label>
+                        <input type="text" class="form-control" id="city_address" placeholder="i.e. Philadelphia" required>
+                        <div class="invalid-feedback">
+                            Please provide your city
+                          </div>
 
-      <a class="btn btn-primary btn-lg" href="maplistselect.html" id="enterform" role="button">SUBMIT LOCATION AND TIME</a>
+                    </div>
+                    <div class="form-group">
+                            <label for="state_address">State</label>
+                            <select class="form-control" id="state_address" required>
+                              <option>(PA) Pennsylvania</option>
+                              <option>(NJ) New Jersey</option>
+                              <option>(DE) Deleware</option>
+                            </select>
+                          </div>
 
-    </form>
-  </div>
-  <!--close Bootstrap "container" -->
+                    <div class="form-group">
+                            <label for="zip_code_address">Zip Code</label>
+                            <input type="text" class="form-control" id="zip_code_address" placeholder="Zip Code" required>
+                            <div class="invalid-feedback">
+                                Enter a valid mailing zipcode
+                              </div>
+                    </div>
+                    <br>
+                    <h4>How much time do you have available to study today?</h4>
+                    <div class="form-group">
+                            <label for="exampleFormControlSelect1">Approximate Number of Hours (Your entry info will be cleared from this app when your available time is over.)</label>
+                            <select class="form-control" id="hoursAvailable" >
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                            </select>
+                          </div>
+                    
+                    <button class="btn btn-primary btn-lg" href="#" id="enterform" type="submit">SUBMIT LOCATION AND TIME</a>
 
-  </div>
-  <script src="assets/app_entry.js"></script>
+                  </form>
+    </div> <!--close Bootstrap "container" -->   
+
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+          'use strict';
+          window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+              form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                  event.preventDefault();
+                  event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+              }, false);
+            });
+          }, false);
+        })();
+        </script>
+     <script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+      <script src="assets/app_entry.js"></script>
 </body>
-
 </html>
