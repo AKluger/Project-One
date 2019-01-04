@@ -66,7 +66,7 @@ $(document).ready(function () {
     var location = street + city + state;
     // user city and state from form here
 
-    var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=cafe&location=" + location + "&radius=11265";
+    var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=cafe&latitude=" + midpointLat + "&longitude=" + midpointLong + "&radius=11265";
     //api call to Yelp for cafe names and coordinates 
     $.ajax({
         url: queryURL,
