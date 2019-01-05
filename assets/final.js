@@ -41,9 +41,6 @@ $(document).ready(function () {
         midpointLat = userCoordinates[0];
     }
 
-    console.log(parseFloat(userCoordinates[1]));
-    console.log(parseFloat(chosenCoordinates[1]));
-
     // Determining longitude (this is a little trickier because longitude is a negative number, hence the parseFloats)
     if (parseFloat(userCoordinates[1]) > parseFloat(chosenCoordinates[1])) {
         midpointLong = parseFloat(userCoordinates[1]) - Math.abs((parseFloat(userCoordinates[1]) - parseFloat(chosenCoordinates[1])) / 2);
@@ -54,19 +51,40 @@ $(document).ready(function () {
     }
 
     midpointCoordinates = [midpointLat, midpointLong];
-    console.log("midpoint coordinates: " + midpointCoordinates);
 
-
-
-
-
-    var street = localStorage.getItem("street");
-    var city = localStorage.getItem("city");
-    var state = localStorage.getItem("state");
-    var location = street + city + state;
+    // var street = localStorage.getItem("street");
+    // var city = localStorage.getItem("city");
+    // var state = localStorage.getItem("state");
+    // var location = street + city + state;
     // user city and state from form here
 
-    var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=cafe&latitude=" + midpointLat + "&longitude=" + midpointLong + "&radius=11265";
+
+    // Determining map zoom level and number of cafes based on distance between user and chosen buddy
+    var distance = localStorage.getItem("distance");
+    var zoom;
+    var limit;
+    if (distance < 500) {
+        zoom = 16;
+        limit = 5;
+    } else if (distance < 2500) {
+        zoom = 15;
+        limit = 10;
+    } else if (distance < 5000) {
+        zoom = 14;
+        limit = 10;
+    } else if (distance < 10000) {
+        zoom = 13;
+        limit = 20;
+    } else if (distance < 20000) {
+        zoom = 12;
+        limit = 20;
+    } else {
+        zoom = 11;
+        limit = 20;
+    }
+
+
+    var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=cafe&limit=" + limit + "&latitude=" + midpointLat + "&longitude=" + midpointLong + "&radius=" + distance;
     //api call to Yelp for cafe names and coordinates 
     $.ajax({
         url: queryURL,
@@ -76,59 +94,47 @@ $(document).ready(function () {
         method: "GET"
     }).then(function (response) {
 
+        console.log(response);
+
+        //create the map
+        var map = tomtom.L.map('map', {
+            key: 'sYDNGj8wET1YxX9MvoISZSyPtefiwHDM',
+            basePath: '/sdk',
+            center: midpointCoordinates,
+            zoom: zoom
+        });
+
+        //Adding user flag icon
+        var userMarker = tomtom.L.marker(userCoordinates).addTo(map).bindPopup("Your are here").openPopup();
+
+        //Adding chosen study buddy icon
+        var chosenMarker = tomtom.L.marker(chosenCoordinates, {
+            icon: tomtom.L.icon({
+                iconUrl: 'sdk/images/ic_map_poi_027-black.png',
+                iconSize: [40, 40]
+            })
+        }).addTo(map).bindPopup(chosenName);
+
+        // Adding midpoint as a marker(to check if the calculations are correct)
+        // var midpointMarker = tomtom.L.marker(midpointCoordinates).addTo(map).bindPopup('Midpoint (delete this popup once you know it works)');
+
         for (var i = 0; i < response.businesses.length; i++) {
-            var results = response.businesses[i].coordinates;
-            var lat = results.latitude;
-            var lng = results.longitude;
+            var lat = response.businesses[i].coordinates.latitude;
+            var lng = response.businesses[i].coordinates.longitude;
             var coordinates = [lat, lng];
             var name = response.businesses[i].name;
             var webUrl = response.businesses[i].url;
             // store in firebase
-            database.ref("places").push({
-                placeName: name,
-                placeCoordinates: coordinates,
-                placeUrl: webUrl
-            });
 
-            //create the map
-            var map = tomtom.L.map('map', {
-                key: 'sYDNGj8wET1YxX9MvoISZSyPtefiwHDM',
-                basePath: '/sdk',
-                center: midpointCoordinates,
-                zoom: 14
-            });
-
-            database.ref("places").on("child_added", function (snapshot) {
-
-                var sv = snapshot.val();
-
-                console.log(sv.placeName);
-                console.log(sv.placeCoordinates);
-                // Adding coffee places
-
-                var marker = tomtom.L.marker(sv.placeCoordinates, {
-                    icon: tomtom.L.icon({
-                        iconUrl: 'assets/coffee.png',
-                        iconSize: [30, 30]
-                    })
-                }).addTo(map).bindPopup(sv.placeName);
-                //add coffeeshop icon with name to map
-            }); // close snapshot
-
-            //Adding user flag icon
-            var userMarker = tomtom.L.marker(userCoordinates).addTo(map).bindPopup("Your are here");
-
-            //Adding chosen study buddy icon
-            var chosenMarker = tomtom.L.marker(chosenCoordinates, {
+            tomtom.L.marker(coordinates, {
                 icon: tomtom.L.icon({
-                    iconUrl: 'sdk/images/ic_map_poi_027-black.png',
-                    iconSize: [40, 40]
+                    iconUrl: 'assets/coffee.png',
+                    iconSize: [30, 30]
                 })
-            }).addTo(map).bindPopup(chosenName);
+            }).addTo(map).bindPopup(name);
 
-            // Adding midpoint as a marker(to check if the calculations are correct)
-            var midpointMarker = tomtom.L.marker(midpointCoordinates).addTo(map).bindPopup('Midpoint (delete this popup once you know it works)');
-        }
-    })
+        };
 
-})
+    }); // close ajax
+
+}); // close document.ready

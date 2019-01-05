@@ -146,14 +146,12 @@ $(document).ready(function () {
       function sortTable() {
         var table, rows, switching, i, x, y, shouldSwitch;
         table = $("table");
-        console.log(table);
         switching = true;
         // Make a loop that will continue until no switching has been done
         while (switching) {
           // start by saying: no switching is done:
           switching = false;
           rows = table[0].rows;
-          console.log(rows);
           // Loop through all table rows (except the first, which contains table headers):
           for (i = 1; i < (rows.length - 1); i++) {
             // start by saying there should be no switching:
@@ -169,8 +167,6 @@ $(document).ready(function () {
             }
           }
           if (shouldSwitch) {
-            /*If a switch has been marked, make the switch
-            and mark that a switch has been done:*/
             rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
             switching = true;
           }
@@ -189,6 +185,7 @@ $(document).ready(function () {
         // Store the chosen study buddy name and location to local storage
         localStorage.setItem("chosenName", this.id);
         localStorage.setItem("chosenCoordinates", chosenCoordinates);
+        localStorage.setItem("distance", this.getAttribute("distance"));
 
         // Either we color the button differently or use radio buttons to indicate that the person is selected
         // var changeColor = $(this).css({"background-color": "blue"});
