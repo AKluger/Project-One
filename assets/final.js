@@ -26,6 +26,9 @@ $(document).ready(function () {
     chosenCoordinates = chosenCoordinates.split(',');
     var chosenName = localStorage.getItem("chosenName");
 
+    // Adds a prompt to contact the chosen study buddy through slack
+    $("#slackLink").append("Contact " + chosenName + " through Slack and discuss which cafe you'd like to meet at");
+
     // Calculating the midpoint between user and selected student
     var midpointCoordinates = [];
     var midpointLat;
@@ -61,21 +64,24 @@ $(document).ready(function () {
 
     // Determining map zoom level and number of cafes based on distance between user and chosen buddy
     var distance = localStorage.getItem("distance");
+    var modDist = Math.round(distance / 2); // this will be used in the Yelp API query to limit radius of search
     var zoom;
     var limit;
     if (distance < 500) {
         zoom = 16;
         limit = 5;
+        modDist = distance; // too close so expand search radius
     } else if (distance < 2500) {
         zoom = 15;
         limit = 10;
+        modDist = distance;
     } else if (distance < 5000) {
         zoom = 14;
         limit = 10;
-    } else if (distance < 10000) {
+    } else if (distance < 7000) {
         zoom = 13;
         limit = 20;
-    } else if (distance < 20000) {
+    } else if (distance < 17000) {
         zoom = 12;
         limit = 20;
     } else {
@@ -83,8 +89,11 @@ $(document).ready(function () {
         limit = 20;
     }
 
+    console.log("zoom set to " + zoom + " and search is limited to " + limit);
+    console.log(distance);
+    console.log(modDist);
 
-    var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=cafe&limit=" + limit + "&latitude=" + midpointLat + "&longitude=" + midpointLong + "&radius=" + distance;
+    var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=cafe&limit=" + limit + "&latitude=" + midpointLat + "&longitude=" + midpointLong + "&radius=" + modDist;
     //api call to Yelp for cafe names and coordinates 
     $.ajax({
         url: queryURL,
