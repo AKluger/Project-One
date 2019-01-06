@@ -30,6 +30,7 @@ $("#enterform").on("click", function (event) {
   street = $("#street_address").val().trim();
   street = street.replace(/\s+/g, '+');  // this regex replaces spaces with + marks e.g. 3000+Market+St
   city = $("#city_address").val().trim();
+  city = city.replace(/\s+/g, '+');
   state = $("#state_address").val().trim();
   state = state[1] + state[2]; // just need the two letter acronym e.g. PA from the state address field
   console.log("This is the state address before storing: " + state);
