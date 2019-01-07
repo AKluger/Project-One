@@ -15,18 +15,30 @@ $(document).ready(function () {
   // Create a variable to reference the database.
   var database = firebase.database();
 
-  // // Firebase watcher .on
-  // database.ref().on("value", function (snapshot) {
-  //   // storing the snapshot.val() in a variable for convenience
-  //   var sv = snapshot.val();
 
-  // Console.logging addresses in firebase 
-  // console.log(sv);
-  // console.log(sv.street);
-  // console.log(sv.city);
-  // console.log(sv.state);
-  // console.log(sv.zip);
-  // console.log(sv.hours);
+  // Removing users from firebase whose endtime has passed
+
+  var cutoff = moment() - 1; // basically now but one millisecond behind
+  var old = firebase.database().ref('users').orderByChild('endtime').endAt(cutoff).limitToLast(1);
+  var listener = old.on('child_added', function (snapshot) {
+    snapshot.ref.remove();
+  });
+
+  // var cutoff = moment() - 3600;
+  // var old = firebase.database().ref('users').orderByChild('timeAdded').endAt(cutoff).limitToLast(1);
+  // var listener = old.on('child_added', function (snapshot) {
+  //   snapshot.ref.remove();
+  // });
+
+
+  // database.orderByChild('infoAdded').equalTo('whateverKey')
+  //   .once('value').then(function (snapshot) {
+  //     snapshot.forEach(function (childSnapshot) {
+  //       //remove each child
+  //       database.child(childSnapshot.key).remove();
+  //     });
+  //   });
+
 
   // Get the user location from the local storage
   var street = localStorage.getItem("street");
@@ -111,6 +123,12 @@ $(document).ready(function () {
         // degree can be coverted to meters by multiplying with 111,139
         distanceTo = distanceTo * 111139;
         distanceTo = Math.round(distanceTo);
+        
+
+
+        // Convert endtime to HH:mm format
+        var endTime = snap.endtime;
+        endTime = moment(endTime).format("LT");
 
         // Generate a button to select
         var selectBtn = $("<a>");
@@ -127,13 +145,17 @@ $(document).ready(function () {
         var snapStreet = snap.street;
         snapStreet = snapStreet.split('+').join(' ');
 
+        // Calculating distance in miles from distanceTo
+        var milesTo = distanceTo * 0.000621371;
+        milesTo = milesTo.toFixed(2); // two decimal places
+
         // Adding the other student information to a chart
         var newRow = $("<tr>").append(
           $("<td>").text(snap.name),
           $("<td>").text(snapStreet),
-          $("<td>").text(distanceTo),
+          $("<td>").text(milesTo),
           $("<td>").text(snap.hours),
-          $("<td>").text("Kevin: need the calculated end time here"),
+          $("<td>").text(endTime),
           $("<td>").append(selectBtn)
         );
 
