@@ -14,10 +14,6 @@ $(document).ready(function () {
     // Create a variable to reference the database.
     var database = firebase.database();
 
-    // $("#enterform").on("click", function (event) {
-
-    // event.preventDefault();
-
     // Retrieve user and chosen study buddy locations from local storage
     var userCoordinates = localStorage.getItem("userCoordinates");
     userCoordinates = userCoordinates.split(',');
@@ -33,7 +29,6 @@ $(document).ready(function () {
     var midpointCoordinates = [];
     var midpointLat;
     var midpointLong;
-
 
     // Determining latitude
     if (userCoordinates[0] > chosenCoordinates[0]) {
@@ -54,13 +49,6 @@ $(document).ready(function () {
     }
 
     midpointCoordinates = [midpointLat, midpointLong];
-
-    // var street = localStorage.getItem("street");
-    // var city = localStorage.getItem("city");
-    // var state = localStorage.getItem("state");
-    // var location = street + city + state;
-    // user city and state from form here
-
 
     // Determining map zoom level and number of cafes based on distance between user and chosen buddy
     var distance = localStorage.getItem("distance");
@@ -89,10 +77,6 @@ $(document).ready(function () {
         limit = 20;
     }
 
-    console.log("zoom set to " + zoom + " and search is limited to " + limit);
-    console.log(distance);
-    console.log(modDist);
-
     var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=cafe&limit=" + limit + "&latitude=" + midpointLat + "&longitude=" + midpointLong + "&radius=" + modDist;
     //api call to Yelp for cafe names and coordinates 
     $.ajax({
@@ -102,8 +86,6 @@ $(document).ready(function () {
         },
         method: "GET"
     }).then(function (response) {
-
-        console.log(response);
 
         //create the map
         var map = tomtom.L.map('map', {
@@ -133,7 +115,6 @@ $(document).ready(function () {
             var coordinates = [lat, lng];
             var name = response.businesses[i].name;
             var webUrl = response.businesses[i].url;
-            // store in firebase
 
             tomtom.L.marker(coordinates, {
                 icon: tomtom.L.icon({
@@ -141,9 +122,19 @@ $(document).ready(function () {
                     iconSize: [30, 30]
                 })
             }).addTo(map).bindPopup(name);
-
         };
 
     }); // close ajax
+
+    // Event listener for button to remove user from Firebase
+    $('#resetUser').on("click", function () {
+        var clearUser = database.ref("users").orderByChild("name").equalTo(userName).once("value").then(function (snapshot) {
+            snapshot.forEach(function (child) {
+                child.ref.remove();
+                $('#resetUser').append("You have been removed from database");
+            });
+        });
+    });
+
 
 }); // close document.ready

@@ -15,30 +15,12 @@ $(document).ready(function () {
   // Create a variable to reference the database.
   var database = firebase.database();
 
-
   // Removing users from firebase whose endtime has passed
-
-  var cutoff = moment() - 1; // basically now but one millisecond behind
+  var cutoff = moment() - 1; // basically now but one millisecond behind, this displays the actual time instead of the object
   var old = firebase.database().ref('users').orderByChild('endtime').endAt(cutoff).limitToLast(1);
   var listener = old.on('child_added', function (snapshot) {
     snapshot.ref.remove();
   });
-
-  // var cutoff = moment() - 3600;
-  // var old = firebase.database().ref('users').orderByChild('timeAdded').endAt(cutoff).limitToLast(1);
-  // var listener = old.on('child_added', function (snapshot) {
-  //   snapshot.ref.remove();
-  // });
-
-
-  // database.orderByChild('infoAdded').equalTo('whateverKey')
-  //   .once('value').then(function (snapshot) {
-  //     snapshot.forEach(function (childSnapshot) {
-  //       //remove each child
-  //       database.child(childSnapshot.key).remove();
-  //     });
-  //   });
-
 
   // Get the user location from the local storage
   var street = localStorage.getItem("street");
