@@ -130,8 +130,17 @@ $(document).ready(function () {
     $('#resetUser').on("click", function () {
         var clearUser = database.ref("users").orderByChild("name").equalTo(userName).once("value").then(function (snapshot) {
             snapshot.forEach(function (child) {
-                child.ref.remove();
-                $('#resetUser').append("You have been removed from database");
+                child.ref.remove(); // remove from firebase
+                // Clear the div to get rid of the reset button
+                $('#reset').html("");
+                // Add confirmation message that user was removed with a button to take them back to enterform
+                $('#reset').append("<br>");
+                $('#reset').append("You have been removed from the database");
+                var restartLink = $("<a>");
+                restartLink.attr("class", "btn btn-secondary chosen");
+                restartLink.attr("href", "enterform.html");
+                restartLink.text("Restart from entry form");
+                $('#reset').append(restartLink);
             });
         });
     });
