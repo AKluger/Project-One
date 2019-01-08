@@ -121,7 +121,7 @@ $(document).ready(function () {
                     iconUrl: 'assets/coffee.png',
                     iconSize: [30, 30]
                 })
-            }).addTo(map).bindPopup(name);
+            }).addTo(map).bindPopup(name + "<br><a href=" + webUrl + " target=\"_blank\">Open Cafe website</a>");
         };
 
     }); // close ajax
@@ -136,6 +136,7 @@ $(document).ready(function () {
                 // Add confirmation message that user was removed with a button to take them back to enterform
                 $('#reset').append("<br>");
                 $('#reset').append("You have been removed from the database");
+                $('#reset').append("<br>");
                 var restartLink = $("<a>");
                 restartLink.attr("class", "btn btn-secondary chosen");
                 restartLink.attr("href", "enterform.html");
