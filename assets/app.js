@@ -42,10 +42,6 @@ $(document).ready(function () {
     userCoordinates = [lat, lng];
     localStorage.setItem("userCoordinates", userCoordinates); // adds userCoordinates to localStorage
 
-    // Default locations
-    //var phillyCoordinates = [39.9526, -75.1652];
-    //var pennovationCoordinates = [39.941252, -75.199540]
-
     // Map itself uses the TomTom SDK (hence the massive /sdk directory)
     var map = tomtom.L.map('map', {
       key: 'sYDNGj8wET1YxX9MvoISZSyPtefiwHDM',
@@ -71,11 +67,6 @@ $(document).ready(function () {
           })
         }).addTo(map).bindPopup(snap.name);
 
-
-
-
-        // var distBetween = distance(userCoordinates, snap.coordinates);
-        // console.log(distBetween);
 
         // Variables needed to solving distance in order to sort the table later by distance
         var distanceTo;
@@ -208,42 +199,3 @@ $(document).ready(function () {
   }); // close ajax
 
 }); // close document ready
-
-
-  // Change the HTML to reflect
-  // $("#name-display").text(sv.name);
-  // $("#email-display").text(sv.email);
-  // $("#age-display").text(sv.age);
-  // $("#comment-display").text(sv.comment);
-
-  //   // Handle the errors
-  // }, function (errorObject) {
-  //   console.log("Errors handled: " + errorObject.code);
-  // });
-
-
-// $(document).ready(function() {
-
-    //clearing out the time in the time once the time limit has been met the database
-
-    //this is what will make the timer go down when the user clicks it which will start the timer from the submit button from the front screen
-
-    //This is what will happen when the user pushes the button and page/timer for what user put in for time will start to count down
-//     $("#start").on("click", function() {
-//         $("start").hide();
-//         start(i=0);
-//     })
-
-//     //Timer on the page that will start going down but will be hidden in backgroudn
-//     function run() {
-//         intervalId = setInterval(decrement, 1000);
-//     }
-
-//     function decrement() {
-//         number--;
-//         console.log(run);
-
-
-//     }
-
-// })
