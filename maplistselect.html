@@ -23,49 +23,53 @@
 
     <!-- Our CSS file -->
     <link rel="stylesheet" type="text/css" media="screen" href="assets/style.css" />
-
+    <!-- GOOGLE DISPLAY FONT -->
+    <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet">
+    <!-- GOOGLEFONTS SERIF SUBHEADER -->
+    <link href="https://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet">
 </head>
 
 <body>
 
     <div class="container">
-        <div class="jumbotron">
-            <h1 class="display-4">SAKI Study</h1>
-            <p class="lead">Here are your classmates! You can choose them from this map or from the available list
-                below.</p>
-        </div>
-        <!--close jumbotron-->
-    </div>
-    <!--close container-->
+        <div class="jumbotron icy_blue tan_bottom clearance jumbotron_edge">
+            <h1 class="display-4 fredericka dark_blue">SAKI Study</h1>
+            <br>
+            <div class="grey_back">
+                <p>&#8226;&nbsp;Here are your classmates! </p> 
+                <p>&#8226;&nbsp;Click on the icon to see you classmates name!</p>
+                <p>&#8226;&nbsp;You can choose the name from the available list below the map.</p>
+            </div> <!-- close grey_back -->
+        </div> <!--close jumbotron-->
+    </div> <!--close container-->
 
     <div class="container">
         <div class="mapContainer">
             <div id='map'></div>
         </div>
         <br>
-        <form action="">
-            <!-- Displays students -->
-            <table class="table table-hover">
-                <h5>Available classmates by distance</h5>
-                <thead>
-                    <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Address</th>
-                        <th scope="col">Miles away</th>
-                        <th scope="col">Hours</th>
-                        <th scope="col">Time when they leave</th>
-                        <th scope="col">Choose this person</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
+        <div class="jumbotron jumbotron_edge clearance ">
+            <form action="">
+                <!-- Displays students -->
+                <table class="table table-hover">
+                    <h4 class="ptserif">Available classmates by distance</h4>
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Miles away</th>
+                            <th scope="col">Hours</th>
+                            <th scope="col">Time when they leave</th>
+                            <th scope="col">Choose this person</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <br>
+            </form>
+        </div> <!-- close jumbotron -->
+    </div> <!--close Bootstrap "container" -->
 
-            <br>
-
-        </form>
-    </div>
-    <!--close Bootstrap "container" -->
-    <!-- dleetge -->
     </div>
 
     <!-- Moment.js -->
