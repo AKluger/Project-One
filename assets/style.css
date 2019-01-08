@@ -1,4 +1,13 @@
+body{
+    background-color: #e0e0d2!important;
+}
 
+.jumbotron_edge{
+    border-radius: 0!important;
+}
+.jumbotron_icyblueback{
+    background-color: #d0e0e2;
+}
 /* mapListSelectPage, same css as responsive web deisgn for images */
 .mapContainer{
     border: 1px solid black;
@@ -6,4 +15,44 @@
 #map {
     width: 100%;
     height: 500px;
+}
+
+/* google font section remove after decision */
+
+.fredericka{
+    font-family: 'Fredericka the Great', cursive;
+}
+.ptserif{
+    font-family: 'PT Serif', serif;
+}
+
+/* color section */
+/* header text */
+.dark_blue{ 
+    color: #52354C!important;
+}
+/* button background */
+.dark_blueback{ 
+    background-color: #52354C!important;
+    /* background-color: #02244A!important; */
+}
+/* background */
+.icy_blue{ 
+    background-color: #86B0B3!important;
+}
+.icy-blueback{
+    background-color: #b1ccce;
+}
+.tan_bottom{
+    border-bottom: 20px solid #52354C;
+}
+.grey_back{
+    background-color: #e6e6e6;
+    padding-top: 20px;
+    padding: 10px;
+}
+
+.clearance{
+    margin-bottom: 0;
+    /* clear: both; */
 }
