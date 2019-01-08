@@ -20,6 +20,7 @@ var city = "";
 var state = "";
 var zip = "";
 var hours = "";
+var endtime;
 
 // Capture Button Click
 $("#enterform").on("click", function (event) {
@@ -36,6 +37,10 @@ $("#enterform").on("click", function (event) {
   console.log("This is the state address before storing: " + state);
   zip = $("#zip_code_address").val().trim();
   hours = $("#hoursAvailable").val().trim();
+  
+  endtime = moment() + (parseInt(hours) * 3600 * 1000); // time stamp in firebase is miliseconds
+
+  console.log(endtime);
 
 
   // Clear local storage and store the address to local storage
@@ -74,7 +79,8 @@ $("#enterform").on("click", function (event) {
       zip: zip,
       coordinates: tempCoordinates,
       hours: hours,
-      infoAdded: firebase.database.ServerValue.TIMESTAMP
+      infoAdded: firebase.database.ServerValue.TIMESTAMP,
+      endtime: endtime
     });
 
     window.location.href = "maplistselect.html";
@@ -83,29 +89,30 @@ $("#enterform").on("click", function (event) {
 
 });
 
-// Firebase watcher .on("child_added"
-database.ref("users").on("child_added", function (snapshot) {
-  // storing the snapshot.val() in a variable for convenience
-  var sv = snapshot.val();
+// // Firebase watcher .on("child_added"
+// database.ref("users").on("child_added", function (snapshot) {
+//   // storing the snapshot.val() in a variable for convenience
+//   var sv = snapshot.val();
 
-  // Console.loging the last user's data
-  console.log(sv);
-  console.log(sv.street);
-  console.log(sv.city);
-  console.log(sv.state);
-  console.log(sv.zip);
-  console.log(sv.hours);
+//   // Console.loging the last user's data
+//   console.log(sv);
+//   console.log(sv.street);
+//   console.log(sv.city);
+//   console.log(sv.state);
+//   console.log(sv.zip);
+//   console.log(sv.hours);
+//   console.log(sv.infoAdded);
 
-  // Change the HTML to reflect
-  // $("#name-display").text(sv.name);
-  // $("#email-display").text(sv.email);
-  // $("#age-display").text(sv.age);
-  // $("#comment-display").text(sv.comment);
+//   // Change the HTML to reflect
+//   // $("#name-display").text(sv.name);
+//   // $("#email-display").text(sv.email);
+//   // $("#age-display").text(sv.age);
+//   // $("#comment-display").text(sv.comment);
 
-  // Handle the errors
-}, function (errorObject) {
-  console.log("Errors handled: " + errorObject.code);
-});
+//   // Handle the errors
+// }, function (errorObject) {
+//   console.log("Errors handled: " + errorObject.code);
+// });
 
 
 

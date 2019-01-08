@@ -26,13 +26,23 @@
         <div id='map'></div>
     </div>
 
-    <div class="container text-center">
-        <!-- If the student has Slack Desktop version, this will open it. Otherwise, it'll open in a new browser tab -->
-        <a href="https://slack.com/app_redirect?channel=CD4TURUD7" target="_blank" id="slackLink">
-            <h1>Open Slack</h1>
-        </a>
-
-
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-center">
+                <!-- Link to slack desktop using team=TD4PVN65N&id=CD4TURUD7 -->
+                <a href="slack://open">
+                    <h1>Open Slack Desktop App</h1>
+                </a>
+                <!-- Link to slack to open in a new browser tab-->
+                <a href="https://slack.com/app_redirect?channel=CD4TURUD7" target="_blank" id="slackLink">
+                    <h1>Open Slack in Browser</h1>
+                </a>
+            </div>
+            <div class="col-md-6 text-center" id="reset">
+                <p>If you want to remove yourself from the database before end time</p>
+                <button class="btn btn-primary btn-lg" id="resetUser">I am done studying</button>
+            </div>
+        </div>
     </div>
 
     <script src="assets/final.js"></script>
