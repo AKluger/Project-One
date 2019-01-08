@@ -23,7 +23,7 @@ $(document).ready(function () {
     var chosenName = localStorage.getItem("chosenName");
 
     // Adds a prompt to contact the chosen study buddy through slack
-    $("#slackLink").append("Contact " + chosenName + " through Slack and discuss which cafe you'd like to meet at");
+    // $("#slackLink").append("Contact " + chosenName + " through Slack and discuss which cafe you'd like to meet at");
 
     // Calculating the midpoint between user and selected student
     var midpointCoordinates = [];

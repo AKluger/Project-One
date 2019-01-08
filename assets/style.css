@@ -53,7 +53,28 @@ body{
     padding-top: 20px;
     padding: 10px;
 }
-
 .clearance{
     margin-bottom: 0;
 }
+/*FLEXBOX FOR FINALSELECT.HTML*/
+
+.slack_container{
+    display: flex; /* or inline-flex */
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 50px;
+
+}
+.slack_item{
+    padding: 10px;
+}
+
+.size_ten{
+    width: 50px;
+}
+.spacetop{
+    padding-top: 50px;
+    text-align: center;
+}
+
