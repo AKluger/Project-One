@@ -31,15 +31,22 @@ var endtime;
     // Loop over them and prevent submission
     var validation = Array.prototype.filter.call(forms, function (form) {
       form.addEventListener('submit', function (event) {
+        event.preventDefault();
         if (form.checkValidity() === false) {
-          event.preventDefault();
+          
           event.stopPropagation();
         }
-        form.classList.add('was-validated');
-
+        form.classList.add('was-validated')
+     
+      }, false);
+    });
+  }, false);
+})();
         // Capture Button Click
         $("#enterform").on("click", function (event) {
-          event.preventDefault();
+
+          // if ($("form").hasClass("was-validated")){
+          // event.preventDefault();
 
           // Grabbed values from text boxes
           name = $("#name").val().trim();
@@ -95,11 +102,11 @@ var endtime;
               endtime: endtime
             });
 
+            if ($("form").hasClass("was-validated"))
+            {
             window.location.href = "maplistselect.html";
+          }
           });
-
+        // }
         });
-      }, false);
-    });
-  }, false);
-})();
+ 
