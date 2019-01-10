@@ -65,7 +65,7 @@ $(document).ready(function () {
         modDist = distance;
     } else if (distance < 5000) {
         zoom = 14;
-        limit = 10;
+        limit = 20;
     } else if (distance < 7000) {
         zoom = 13;
         limit = 20;
