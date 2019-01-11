@@ -13,16 +13,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
-
     <!-- For TomTom maps -->
     <link rel='stylesheet' type='text/css' href='sdk/map.css' />
     <script src='sdk/tomtom.min.js'></script>
-
     <!-- GOOGLE DISPLAY FONT -->
     <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet">
     <!-- GOOGLEFONTS SERIF SUBHEADER -->
     <link href="https://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet">
-
 </head>
 
 <body>
@@ -31,50 +28,62 @@
             <h1 class="display-4 fredericka dark_blue">SAKI Study</h1>
             <br>
             <div class="grey_back">
-                <p>&#8226;&nbsp;Here is your SAKI Study Buddy. </p> 
-                <p>&#8226;&nbsp;Contact through the <b>Slack</b> App options below and discuss where to meet.</p>
-                <p>&#8226;&nbsp;Click on the coffee cup icons to see the cafe information.</p>
+                <p>&#8226;&nbsp;Contact your SAKI Study buddy with the <b>Slack</b> App options below to discuss where to meet</p>
+                <p>&#8226;&nbsp;Click on the coffee cup icons to see the cafe information</p>
             </div> <!-- close grey_back -->
         </div> <!--close jumbotron-->
     </div> <!--close container-->
+
     <div class="container">
         <div class="mapContainer">
             <div id='map'></div>
         </div>
         <div class="grey_back spacetop">
-                        <h4 class="dark_blue ptserif ">Contact your friend through Slack and discuss which cafe you'd like to meet</h4>
-                    </div>
+            <h4 class="dark_blue ptserif ">Contact your friend through Slack and discuss which cafe you'd like to meet</h4>
+        </div>
         <div class="container spacetop grey_back">
 
             <div class="row">
-                <div class="col-1">
-                </div> <!-- close col-1 -->
-                <div class="col-3">
-            <!-- <div class="col-md-6 text-center"> -->
-                    <!-- Link to slack desktop using team=TD4PVN65N&id=CD4TURUD7 -->
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-3">
+                    <!-- Link to slack desktop app -->
                     <a href="slack://open">
-                        <img class="size_ten" src="assets/slacklogo2.png"> <h4 class="dark_blue"> Open Desktop App</h4>
+                        <img class="size_ten" src="assets/slacklogo2.png">
+                        <h4 class="dark_blue">Open Desktop App</h4>
                     </a>
-                </div> <!-- col-3 -->
-                <div class="col-3">
+                    <br>
+                </div> <!-- close col -->
+                <div class="col-md-3">
                     <!-- Link to slack to open in a new browser tab-->
                     <a href="https://slack.com/app_redirect?channel=CD4TURUD7" target="_blank" id="slackLink">
-                        <img class="size_ten" src="assets/slacklogo2.png"> <h4 class="dark_blue">Open in Browser</h4>
+                        <img class="size_ten" src="assets/slacklogo2.png">
+                        <h4 class="dark_blue">Open in Browser</h4>
                     </a>
-                </div> <!-- close col-3 -->
-                <div class="col-3">
+                    <br>
+                </div> <!-- close col -->
+                <div class="col-md-4">
                     <div id="reset">
-                    <!-- <div class="col-md-6 text-center" id="reset"> -->
-                        <p>If you want to remove yourself from the database before end time</p>
-                        <button class="btn btn-primary btn-lg ptserif dark_blueback" id="resetUser">I am done studying</button>
-                    </div> <!-- close col-3 -->
-                <div class="col-1">
-                </div> <!-- close col-1 -->
-                </div> <!-- row -->
-            </div> <!-- close container -->
+                        <!-- <div class="col-md-6 text-center" id="reset"> -->
+                        <p>To remove yourself from the database before end time</p>
+                        <button class="btn btn-primary btn-lg ptserif dark_blueback" id="resetUser">Remove me</button>
+                    </div> <!-- close reset -->
+                    <br>
+                </div> <!-- close col -->
+            </div> <!-- close row -->
         </div> <!-- close container -->
 
-    <script src="assets/final.js"></script>
+        <br>
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="text-center">
+                <span class="text-muted">Copyright©</span>
+            </div>
+        </footer>
+        <br>
+
+        <script src="assets/final.js"></script>
+
 </body>
 
 </html>

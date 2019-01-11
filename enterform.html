@@ -9,13 +9,10 @@
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous">
-
   <!-- Our CSS file-->
   <link rel="stylesheet" type="text/css" media="screen" href="assets/style.css" />
-
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
-
   <!-- GOOGLE DISPLAY FONT -->
   <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet">
   <!-- GOOGLEFONTS SERIF SUBHEADER -->
@@ -26,19 +23,22 @@
   <div class="container">
     <div class="jumbotron icy_blue tan_bottom clearance jumbotron_edge">
       <h1 class="display-4 fredericka dark_blue">SAKI Study</h1>
-        <br>
-        <div class="grey_back rounded">
-        <p>&#8226;&nbsp;Enter your information to see your classmates.</p>
-        <p> &#8226;&nbsp;Your entry info will be cleared from this app when your available time is over. </p>
-        </div> <!--close greyback-->
-      </div>  <!--close jumbotron-->
-    </div>  <!--close container-->
+      <br>
+      <div class="grey_back rounded">
+        <p>&#8226;&nbsp;Enter your information to see your classmates</p>
+        <p> &#8226;&nbsp;Your information will be cleared from this app when your available time is over</p>
+      </div>
+      <!--close greyback-->
+    </div>
+    <!--close jumbotron-->
+  </div>
+  <!--close container-->
 
 
   <div class="container">
     <div class="jumbotron jumbotron_icyblueback jumbotron_edge">
-    <!--validate in Boostrap use form class="needs-validation"-->
-    <!--to create custom validation, use novalidate boolean attribute on form-->
+      <!--validate in Boostrap use form class="needs-validation"-->
+      <!--to create custom validation, use novalidate boolean attribute on form-->
       <form class="needs-validation" novalidate>
         <div class="form-group">
           <label for="name">Your Name</label>
@@ -47,7 +47,9 @@
             Enter your name
           </div>
         </div>
+
         <br>
+
         <h4 class="ptserif">Your Home or Ideal Location to Meet</h4>
         <div class="form-group">
           <label for="street_address">Street Address</label>
@@ -65,8 +67,8 @@
           <div class="invalid-feedback">
             Please provide your city
           </div>
-
         </div>
+
         <div class="form-group">
           <label for="state_address">State</label>
           <select class="form-control" id="state_address" required>
@@ -84,7 +86,9 @@
             Enter a valid zipcode
           </div>
         </div>
+
         <br>
+
         <h4 class="ptserif">How much time do you have available to study today?</h4>
         <div class="form-group">
           <label for="exampleFormControlSelect1">Approximate Number of Hours (Your entry info will be cleared from this
@@ -97,16 +101,24 @@
           </select>
         </div>
 
-        <button class="btn btn-primary btn-lg ptserif dark_blueback" href="#" id="enterform" type="submit">SUBMIT LOCATION AND TIME</a>
+        <button class="btn btn-primary btn-lg ptserif dark_blueback" href="#" id="enterform" type="submit">SUBMIT
+          LOCATION AND TIME</button>
       </form>
-    </div>  <!-- close jumbotron -->
-  </div>  <!--close Bootstrap "container" -->
+    </div> <!-- close jumbotron -->
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="text-center">
+        <span class="text-muted">Copyright©</span>
+      </div>
+    </footer>
+
+  </div> <!--close Bootstrap "container" -->
   <br>
 
-  
+
   <!-- Moment.js -->
   <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
