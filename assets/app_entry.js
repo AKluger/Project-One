@@ -45,8 +45,7 @@ var endtime;
         var nameInput = $('#name').val().length;
 
         if ( zipCodeInput > 0 && cityInput > 0 && streetInput > 0 && nameInput > 0) {
-          window.location.href = "maplistselect.html";
-
+          
         name = $("#name").val().trim();
         street = $("#street_address").val().trim();
         street = street.replace(/\s+/g, '+');  // this regex replaces spaces with + marks e.g. 3000+Market+St
@@ -100,27 +99,12 @@ var endtime;
             endtime: endtime
           });
 
-          if ($("form").hasClass("was-validated"))
-          {
           window.location.href = "maplistselect.html";
-        }
+
         });
       }
-
-
 
       }, false);
     });
   }, false);
 })();
-        // Capture Button Click
-        // $("#enterform").on("click", function (event) {
-
-          // if ($("form").hasClass("was-validated")){
-          // event.preventDefault();
-
-          // Grabbed values from text boxes
-      
-        // }
-        // });
- 

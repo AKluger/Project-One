@@ -22,9 +22,6 @@ $(document).ready(function () {
     chosenCoordinates = chosenCoordinates.split(',');
     var chosenName = localStorage.getItem("chosenName");
 
-    // Adds a prompt to contact the chosen study buddy through slack
-    // $("#slackLink").append("Contact " + chosenName + " through Slack and discuss which cafe you'd like to meet at");
-
     // Calculating the midpoint between user and selected student
     var midpointCoordinates = [];
     var midpointLat;
@@ -57,7 +54,7 @@ $(document).ready(function () {
     var limit;
     if (distance < 500) {
         zoom = 16;
-        limit = 5;
+        limit = 10;
         modDist = distance; // too close so expand search radius
     } else if (distance < 2500) {
         zoom = 15;
@@ -106,9 +103,6 @@ $(document).ready(function () {
             })
         }).addTo(map).bindPopup(chosenName);
 
-        // Adding midpoint as a marker(to check if the calculations are correct)
-        // var midpointMarker = tomtom.L.marker(midpointCoordinates).addTo(map).bindPopup('Midpoint (delete this popup once you know it works)');
-
         for (var i = 0; i < response.businesses.length; i++) {
             var lat = response.businesses[i].coordinates.latitude;
             var lng = response.businesses[i].coordinates.longitude;
@@ -136,7 +130,7 @@ $(document).ready(function () {
                 // Add confirmation message that user was removed with a button to take them back to enterform
                 $('#reset').append("<br>");
                 $('#reset').append("You have been removed from the database");
-                $('#reset').append("<br>");
+                $('#reset').append("<br><br>");
                 var restartLink = $("<a>");
                 restartLink.attr("class", "btn btn-secondary chosen");
                 restartLink.attr("href", "enterform.html");

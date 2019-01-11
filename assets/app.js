@@ -27,7 +27,7 @@ $(document).ready(function () {
   var city = localStorage.getItem("city");
   var state = localStorage.getItem("state");
 
-  // Ajax code to geocod.io to convert text address to latitude and longitude
+  // Ajax code to geocodio to convert text address to latitude and longitude
   var queryURL = "https://api.geocod.io/v1.3/geocode?street=" + street + "&city=" + city + "&state=" + state + "&api_key=6446f59bc5ec449c45ce44c9c4466c5f61816e1"
 
   var userCoordinates = [];
@@ -36,7 +36,7 @@ $(document).ready(function () {
     url: queryURL,
     method: "GET"
   }).then(function (response) {
-    //Storing latitude and longitude
+    // Storing latitude and longitude
     var lat = response.results[0].location.lat; // stores latitude
     var lng = response.results[0].location.lng; // stores longitude
     userCoordinates = [lat, lng];
@@ -114,8 +114,6 @@ $(document).ready(function () {
         selectBtn.attr("role", "button");
         selectBtn.text("Choose");
 
-        // selectBtn.text("Choose " + snap.name + " as your Study Buddy");
-
         // replace + marks in street address to spaces
         var snapStreet = snap.street;
         snapStreet = snapStreet.split('+').join(' ');
@@ -170,7 +168,7 @@ $(document).ready(function () {
         }
       }
 
-      sortTable();
+      sortTable(); // run function sortTable
 
       // On click for chosing a study buddy
       $(".chosen").on("click", function (event) {
@@ -184,17 +182,12 @@ $(document).ready(function () {
         localStorage.setItem("chosenCoordinates", chosenCoordinates);
         localStorage.setItem("distance", this.getAttribute("distance"));
 
-        // Either we color the button differently or use radio buttons to indicate that the person is selected
-        // var changeColor = $(this).css({"background-color": "blue"});
-
-        // or move directly into final select
+        // Move directly into final select
         window.location.href = "finalselect.html";
 
       }); // close onclick button
 
     }); // close firebase
-
-
 
   }); // close ajax
 
